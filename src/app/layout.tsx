@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import { Code2, User } from "lucide-react";
-import LightPillar from "@/components/LightPillar";
+import FloatingLines from "@/components/FloatingLines";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,21 +20,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* Global LightPillar Background */}
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 0, pointerEvents: 'none' }}>
-          <LightPillar
-            topColor="#5227FF"
-            bottomColor="#FF9FFC"
-            intensity={1}
-            rotationSpeed={0.3}
-            glowAmount={0.002}
-            pillarWidth={3}
-            pillarHeight={0.4}
-            noiseIntensity={0.5}
-            pillarRotation={25}
-            interactive={false}
-            mixBlendMode="screen"
-            quality="high"
+        {/* Global FloatingLines Background */}
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 0, pointerEvents: 'none', opacity: 0.35 }}>
+          <FloatingLines 
+            enabledWaves={["top","middle","bottom"]}
+            lineCount={8}
+            lineDistance={8}
+            bendRadius={8}
+            bendStrength={-2}
+            interactive={true}
+            parallax={true}
+            animationSpeed={1}
+            linesGradient={["#e945f5", "#6f6f6f", "#6a6a6a"]}
           />
         </div>
 

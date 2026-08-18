@@ -8,9 +8,9 @@
   --text-secondary: #94a3b8;
   
   --accent-blue: #3b82f6;
-  --accent-purple: #5227FF;
+  --accent-purple: #e945f5;
   --accent-cyan: #06b6d4;
-  --accent-pink: #FF9FFC;
+  --accent-pink: #ff85ff;
   --accent-gradient: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
   
   --border-glass: rgba(255, 255, 255, 0.08);
