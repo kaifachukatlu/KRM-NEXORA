@@ -134,10 +134,10 @@ function RegisterForm() {
               </select>
             </div>
 
-            <div className="form-group">
-              <label className="form-label">Project Files / Documentation</label>
-              <input type="file" name="files" className="form-input" style={{ paddingTop: "0.5rem" }} multiple />
-              <div className="form-error" style={{ color: "var(--text-secondary)" }}>Optional: PPT, PDF, Source code</div>
+            <div className="form-group" style={{ gridColumn: "1 / -1" }}>
+              <div style={{ background: "rgba(139, 92, 246, 0.1)", padding: "1rem", borderRadius: "0.5rem", border: "1px dashed var(--accent-purple)", color: "var(--accent-purple)", fontSize: "0.9rem", lineHeight: "1.5" }}>
+                <strong>📎 Project Files & Documentation:</strong> Please send any related project files (PPT, PDF, Source Code) directly to our WhatsApp number after submitting this registration form.
+              </div>
             </div>
 
             <div className="form-group" style={{ gridColumn: "1 / -1", marginTop: "1rem" }}>
