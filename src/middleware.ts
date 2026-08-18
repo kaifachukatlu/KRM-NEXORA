@@ -13,8 +13,8 @@ export function middleware(req: NextRequest) {
       const [user, pwd] = atob(authValue).split(':');
 
       // Uses environment variables for security, with a secure fallback for local testing
-      const validUser = process.env.ADMIN_USERNAME || 'admin';
-      const validPwd = process.env.ADMIN_PASSWORD || 'nexora2026';
+      const validUser = process.env.ADMIN_USERNAME || 'KRM';
+      const validPwd = process.env.ADMIN_PASSWORD || 'KRM';
 
       if (user === validUser && pwd === validPwd) {
         return NextResponse.next();
