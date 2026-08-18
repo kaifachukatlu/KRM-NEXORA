@@ -80,7 +80,9 @@ export default async function AdminDashboard() {
                     </span>
                   </td>
                   <td style={{ padding: "1rem" }}>
-                    <button className="btn btn-secondary" style={{ padding: "0.5rem 1rem", fontSize: "0.875rem" }}>View</button>
+                    <Link href={`/dashboard/admin/project/${project.id}`} className="btn btn-secondary" style={{ padding: "0.5rem 1rem", fontSize: "0.875rem" }}>
+                      View
+                    </Link>
                   </td>
                 </tr>
               ))}
