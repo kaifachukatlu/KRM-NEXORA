@@ -1,10 +1,14 @@
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
-import { Users, Code, Cpu, Clock, Activity, CheckCircle, Search } from "lucide-react";
+import { Users, Code, Cpu, Clock, Activity, CheckCircle } from "lucide-react";
+import AdminSearch from "@/components/AdminSearch";
 
 export const dynamic = "force-dynamic";
 
-export default async function AdminDashboard() {
+export default async function AdminDashboard({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
+  const resolvedParams = await searchParams;
+  const q = resolvedParams.q || "";
+
   const projects = await prisma.projectRequest.findMany({
     orderBy: { createdAt: "desc" },
   });
@@ -17,6 +21,16 @@ export default async function AdminDashboard() {
     inDevelopment: projects.filter(p => p.status === "Development" || p.status === "Testing").length,
     completed: projects.filter(p => p.status === "Completed").length,
   };
+
+  let displayProjects = projects;
+  if (q) {
+    const lowerQ = q.toLowerCase();
+    displayProjects = projects.filter(p => 
+      p.registrationId.toLowerCase().includes(lowerQ) ||
+      p.fullName.toLowerCase().includes(lowerQ) ||
+      p.mobileNumber.includes(q)
+    );
+  }
 
   return (
     <div className="container" style={{ padding: "3rem 1.5rem" }}>
@@ -39,10 +53,7 @@ export default async function AdminDashboard() {
       <div className="glass-panel" style={{ padding: "2rem" }}>
         <div className="flex justify-between items-center mb-6">
           <h2 style={{ fontSize: "1.5rem" }}>Recent Registrations</h2>
-          <div style={{ position: "relative", width: "300px" }}>
-            <Search size={18} style={{ position: "absolute", left: "1rem", top: "50%", transform: "translateY(-50%)", color: "var(--text-secondary)" }} />
-            <input type="text" placeholder="Search students..." className="form-input" style={{ paddingLeft: "2.5rem" }} />
-          </div>
+          <AdminSearch />
         </div>
 
         <div style={{ overflowX: "auto" }}>
@@ -58,7 +69,7 @@ export default async function AdminDashboard() {
               </tr>
             </thead>
             <tbody>
-              {projects.map((project) => (
+              {displayProjects.map((project) => (
                 <tr key={project.id} style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
                   <td style={{ padding: "1rem", fontFamily: "monospace", color: "var(--accent-cyan)" }}>{project.registrationId.slice(0, 8)}</td>
                   <td style={{ padding: "1rem" }}>
@@ -86,7 +97,7 @@ export default async function AdminDashboard() {
                   </td>
                 </tr>
               ))}
-              {projects.length === 0 && (
+              {displayProjects.length === 0 && (
                 <tr>
                   <td colSpan={6} style={{ padding: "2rem", textAlign: "center", color: "var(--text-secondary)" }}>No registrations found.</td>
                 </tr>
