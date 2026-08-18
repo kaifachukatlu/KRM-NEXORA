@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# KRM NEXORA - Project Registration Portal 🚀
 
-## Getting Started
+Welcome to **KRM NEXORA**, a premium platform for students to register and track their Academic, Minor, Major, and Personal Portfolio projects.
 
-First, run the development server:
+![Live Status](https://img.shields.io/badge/Status-Live-success?style=for-the-badge)
+![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Neon-blue?style=for-the-badge&logo=postgresql)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+🌍 **Live Website:** [https://krm-nexora.vercel.app](https://krm-nexora.vercel.app)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
+- **Beautiful 3D UI**: Fully responsive, glassmorphic design with interactive Three.js backgrounds.
+- **Student Dashboard**: Live timeline tracking of project development phases.
+- **Admin Dashboard**: Secure, password-protected admin panel to view all incoming leads.
+- **Instant Notifications**: Automated WhatsApp redirect system for instant communication between students and admins.
+- **Cloud Database**: Powered by Prisma and Neon PostgreSQL for serverless reliability.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
+- **Frontend**: Next.js 14 (App Router), React, Framer Motion, Three.js
+- **Backend**: Next.js Server Actions, Next.js Middleware (Basic Auth)
+- **Database**: PostgreSQL (Neon), Prisma ORM
+- **Deployment**: Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Local Development
 
-## Learn More
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Set up your `.env` file with your `DATABASE_URL` and Admin credentials:
+   ```env
+   DATABASE_URL="postgresql://..."
+   ADMIN_USERNAME="admin"
+   ADMIN_PASSWORD="your-secure-password"
+   ```
+4. Push the database schema:
+   ```bash
+   npx prisma db push
+   ```
+5. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contact
+For project development and support inquiries, please contact the KRM NEXORA administration team through the live portal.
