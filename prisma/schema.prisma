@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  role      String   @default("STUDENT") // "STUDENT" or "ADMIN"
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProjectRequest {
+  id             String   @id @default(cuid())
+  registrationId String   @unique @default(cuid())
+  
+  // Personal Details
+  fullName       String
+  emailAddress   String
+  mobileNumber   String
+  college        String
+  department     String
+  yearSemester   String
+
+  // Project Details
+  projectType    String
+  projectStatus  String
+  techPreference String
+  projectTitle   String
+  requirements   String
+  expectedDate   String
+  budgetRange    String
+
+  // Files
+  files          String?  // JSON string or comma-separated paths
+
+  // Admin / Progress Tracking
+  status         String   @default("Registered") 
+  // Statuses: Registered, Requirement Review, Development, Testing, Documentation, Completed
+  assignedTo     String?
+  adminNotes     String?
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
