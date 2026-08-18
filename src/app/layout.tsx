@@ -31,7 +31,7 @@ export default function RootLayout({
             interactive={true}
             parallax={true}
             animationSpeed={1}
-            linesGradient={["#e945f5", "#6f6f6f", "#6a6a6a"]}
+            linesGradient={["#00f2fe", "#4facfe", "#005bea"]}
           />
         </div>
 
