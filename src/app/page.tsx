@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, Code, Cpu, Smartphone, Database, BookOpen, Presentation, MonitorDot, Wrench, Briefcase, CheckCircle2, ShieldCheck, Zap } from "lucide-react";
-import LightPillar from "@/components/LightPillar";
 import SpotlightCard from "@/components/SpotlightCard";
 import Projects from "@/components/Projects";
 
@@ -12,9 +11,7 @@ export default function Home() {
     <div className="container" style={{ paddingTop: "4rem", paddingBottom: "4rem" }}>
       {/* Hero Section */}
       <section style={{ textAlign: "center", marginBottom: "6rem", position: "relative", minHeight: "80vh", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-        <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 0, opacity: 0.6, pointerEvents: "none" }}>
-          <LightPillar topColor="#3b82f6" bottomColor="#8b5cf6" />
-        </div>
+
         <motion.div
           style={{ position: 'relative', zIndex: 10 }}
           initial={{ opacity: 0, y: 20 }}
