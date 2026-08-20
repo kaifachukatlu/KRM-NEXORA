@@ -3,12 +3,18 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, Code, Cpu, Smartphone, Database, BookOpen, Presentation, MonitorDot, Wrench, Briefcase } from "lucide-react";
+import LightPillar from "@/components/LightPillar";
+import SpotlightCard from "@/components/SpotlightCard";
+import Projects from "@/components/Projects";
 
 export default function Home() {
   return (
     <div className="container" style={{ paddingTop: "4rem", paddingBottom: "4rem" }}>
       {/* Hero Section */}
-      <section style={{ textAlign: "center", marginBottom: "6rem", position: "relative" }}>
+      <section style={{ textAlign: "center", marginBottom: "6rem", position: "relative", minHeight: "80vh", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+        <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 0, opacity: 0.6, pointerEvents: "none" }}>
+          <LightPillar topColor="#3b82f6" bottomColor="#8b5cf6" />
+        </div>
         <motion.div
           style={{ position: 'relative', zIndex: 10 }}
           initial={{ opacity: 0, y: 20 }}
@@ -66,18 +72,21 @@ export default function Home() {
           ].map((service, i) => (
             <motion.div 
               key={i}
-              className="glass-panel"
-              style={{ padding: "2rem", display: "flex", flexDirection: "column", gap: "1rem" }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
+              style={{ display: "flex", height: "100%" }}
             >
-              <div style={{ background: "rgba(255,255,255,0.05)", padding: "1rem", borderRadius: "1rem", width: "fit-content" }}>
-                {service.icon}
-              </div>
-              <h3 style={{ fontSize: "1.25rem" }}>{service.title}</h3>
-              <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem" }}>{service.desc}</p>
+              <SpotlightCard className="glass-panel" spotlightColor="rgba(139, 92, 246, 0.25)" style={{ width: "100%" }}>
+                <div style={{ padding: "2rem", display: "flex", flexDirection: "column", gap: "1rem", height: "100%" }}>
+                  <div style={{ background: "rgba(255,255,255,0.05)", padding: "1rem", borderRadius: "1rem", width: "fit-content" }}>
+                    {service.icon}
+                  </div>
+                  <h3 style={{ fontSize: "1.25rem" }}>{service.title}</h3>
+                  <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem" }}>{service.desc}</p>
+                </div>
+              </SpotlightCard>
             </motion.div>
           ))}
         </div>
@@ -110,6 +119,9 @@ export default function Home() {
           </Link>
         </motion.div>
       </section>
+
+      {/* Projects Showcase Section */}
+      <Projects />
     </div>
   );
 }
