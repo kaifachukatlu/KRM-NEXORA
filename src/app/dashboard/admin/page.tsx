@@ -5,9 +5,10 @@ import AdminSearch from "@/components/AdminSearch";
 
 export const dynamic = "force-dynamic";
 
-export default async function AdminDashboard({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
+export default async function AdminDashboard({ searchParams }: { searchParams: Promise<{ q?: string, status?: string }> }) {
   const resolvedParams = await searchParams;
   const q = resolvedParams.q || "";
+  const filterStatus = resolvedParams.status || "All";
 
   const projects = await prisma.projectRequest.findMany({
     orderBy: { createdAt: "desc" },
@@ -23,6 +24,14 @@ export default async function AdminDashboard({ searchParams }: { searchParams: P
   };
 
   let displayProjects = projects;
+  if (filterStatus !== "All") {
+    displayProjects = displayProjects.filter(p => {
+      if (filterStatus === "Pending") return p.status === "Registered" || p.status === "Requirement Review";
+      if (filterStatus === "In Development") return p.status === "Development" || p.status === "Testing" || p.status === "Documentation";
+      return p.status === filterStatus;
+    });
+  }
+
   if (q) {
     const lowerQ = q.toLowerCase();
     displayProjects = projects.filter(p => 
@@ -47,6 +56,20 @@ export default async function AdminDashboard({ searchParams }: { searchParams: P
         <StatCard title="Pending Requests" value={stats.pending} icon={<Clock size={24} color="var(--warning)" />} />
         <StatCard title="In Development" value={stats.inDevelopment} icon={<Activity size={24} color="var(--accent-cyan)" />} />
         <StatCard title="Completed" value={stats.completed} icon={<CheckCircle size={24} color="var(--success)" />} />
+      </div>
+
+      {/* Status Filter Bar */}
+      <div className="flex gap-4 mb-6" style={{ overflowX: "auto", paddingBottom: "0.5rem" }}>
+        {["All", "Pending", "In Development", "Completed"].map(status => (
+          <Link 
+            key={status} 
+            href={`/dashboard/admin?status=${status}${q ? '&q=' + q : ''}`}
+            className={`btn ${filterStatus === status ? 'btn-primary' : 'btn-secondary'}`}
+            style={{ padding: "0.5rem 1rem", fontSize: "0.875rem", whiteSpace: "nowrap" }}
+          >
+            {status}
+          </Link>
+        ))}
       </div>
 
       {/* Data Table Area */}
