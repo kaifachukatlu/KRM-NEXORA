@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 export async function submitRegistration(formData: FormData) {
   const data = {
@@ -25,4 +26,22 @@ export async function submitRegistration(formData: FormData) {
   });
 
   redirect(`/success?id=${newRequest.registrationId}`);
+}
+
+export async function updateProjectAdminDetails(projectId: string, formData: FormData) {
+  const status = formData.get("status") as string;
+  const assignedTo = formData.get("assignedTo") as string;
+  const adminNotes = formData.get("adminNotes") as string;
+
+  await prisma.projectRequest.update({
+    where: { id: projectId },
+    data: {
+      status,
+      assignedTo: assignedTo === "Unassigned" ? null : assignedTo,
+      adminNotes,
+    },
+  });
+
+  revalidatePath("/dashboard/admin");
+  revalidatePath(`/dashboard/admin/project/${projectId}`);
 }

@@ -1,7 +1,9 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { User, Mail, Phone, MapPin, Building, GraduationCap, Calendar, DollarSign, Target, Code, FileText } from "lucide-react";
+import { User, Mail, Phone, MapPin, Building, GraduationCap, Calendar, DollarSign, Target, Code, FileText, Settings } from "lucide-react";
+import { updateProjectAdminDetails } from "@/app/actions";
+import AdminSubmitButton from "@/components/AdminSubmitButton";
 
 export const dynamic = "force-dynamic";
 
@@ -79,6 +81,56 @@ export default async function AdminProjectDetail({ params }: { params: Promise<{
         </div>
 
       </div>
+
+      {/* Admin Controls */}
+      <div className="glass-panel" style={{ padding: "2rem", marginTop: "2rem", borderTop: "4px solid var(--accent-cyan)" }}>
+        <h2 style={{ fontSize: "1.25rem", color: "var(--accent-cyan)", marginBottom: "1.5rem", borderBottom: "1px solid var(--border-glass)", paddingBottom: "0.5rem" }}>
+          <Settings size={20} style={{ display: "inline", marginRight: "0.5rem", verticalAlign: "middle" }} />
+          Admin Controls
+        </h2>
+
+        <form action={updateProjectAdminDetails.bind(null, project.id)}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem", marginBottom: "1.5rem" }}>
+            <div className="form-group">
+              <label className="form-label">Project Status</label>
+              <select name="status" className="form-select" defaultValue={project.status} required>
+                <option>Registered</option>
+                <option>Requirement Review</option>
+                <option>Development</option>
+                <option>Testing</option>
+                <option>Documentation</option>
+                <option>Completed</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">Assigned To</label>
+              <select name="assignedTo" className="form-select" defaultValue={project.assignedTo || "Unassigned"}>
+                <option>Unassigned</option>
+                <option>Kaif</option>
+                <option>Rithik</option>
+                <option>Medhas</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="form-group" style={{ marginBottom: "1.5rem" }}>
+            <label className="form-label">Private Admin Notes</label>
+            <textarea 
+              name="adminNotes" 
+              className="form-textarea" 
+              rows={4} 
+              defaultValue={project.adminNotes || ""}
+              placeholder="Internal notes, budget negotiations, deadline alerts..."
+            ></textarea>
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <AdminSubmitButton />
+          </div>
+        </form>
+      </div>
+
     </div>
   );
 }
