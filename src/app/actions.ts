@@ -32,6 +32,7 @@ export async function updateProjectAdminDetails(projectId: string, formData: For
   const status = formData.get("status") as string;
   const assignedTo = formData.get("assignedTo") as string;
   const adminNotes = formData.get("adminNotes") as string;
+  const deliverableLink = formData.get("deliverableLink") as string;
 
   await prisma.projectRequest.update({
     where: { id: projectId },
@@ -39,6 +40,7 @@ export async function updateProjectAdminDetails(projectId: string, formData: For
       status,
       assignedTo: assignedTo === "Unassigned" ? null : assignedTo,
       adminNotes,
+      deliverableLink: deliverableLink || null,
     },
   });
 

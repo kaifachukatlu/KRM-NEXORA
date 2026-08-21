@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
-import { Search, User, FileText, CheckCircle2, Circle } from "lucide-react";
+import { Search, User, FileText, CheckCircle2, Circle, Download } from "lucide-react";
 import { redirect } from "next/navigation";
 
 export default async function StudentDashboard({ searchParams }: { searchParams: Promise<{ regId?: string }> }) {
@@ -116,7 +116,21 @@ export default async function StudentDashboard({ searchParams }: { searchParams:
             })}
           </div>
 
-          <div style={{ marginTop: "4rem", paddingTop: "2rem", borderTop: "1px solid var(--border-glass)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          {project.deliverableLink && (
+            <div style={{ marginTop: "4rem", paddingTop: "2rem", borderTop: "1px solid var(--border-glass)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div>
+                <h4 style={{ marginBottom: "0.5rem", color: "var(--accent-cyan)", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                  <Download size={20} /> Project Deliverables Ready
+                </h4>
+                <p style={{ fontSize: "0.875rem", color: "var(--text-secondary)" }}>Your final project files are ready for download.</p>
+              </div>
+              <a href={project.deliverableLink} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ padding: "0.75rem 1.5rem" }}>
+                Download Files
+              </a>
+            </div>
+          )}
+
+          <div style={{ marginTop: project.deliverableLink ? "2rem" : "4rem", paddingTop: "2rem", borderTop: "1px solid var(--border-glass)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div>
               <h4 style={{ marginBottom: "0.5rem" }}>Need to upload more files?</h4>
               <p style={{ fontSize: "0.875rem", color: "var(--text-secondary)" }}>You can send additional requirements to our support team.</p>

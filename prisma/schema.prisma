@@ -49,6 +49,7 @@ model ProjectRequest {
   // Statuses: Registered, Requirement Review, Development, Testing, Documentation, Completed
   assignedTo     String?
   adminNotes     String?
+  deliverableLink String?
 
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt

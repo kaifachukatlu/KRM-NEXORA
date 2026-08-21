@@ -115,6 +115,17 @@ export default async function AdminProjectDetail({ params }: { params: Promise<{
           </div>
 
           <div className="form-group" style={{ marginBottom: "1.5rem" }}>
+            <label className="form-label">Deliverable Link (e.g. Google Drive, GitHub)</label>
+            <input 
+              type="url"
+              name="deliverableLink" 
+              className="form-input" 
+              defaultValue={project.deliverableLink || ""}
+              placeholder="https://drive.google.com/..."
+            />
+          </div>
+
+          <div className="form-group" style={{ marginBottom: "1.5rem" }}>
             <label className="form-label">Private Admin Notes</label>
             <textarea 
               name="adminNotes" 
