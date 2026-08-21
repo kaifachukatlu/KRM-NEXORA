@@ -6,6 +6,16 @@ import { motion } from "framer-motion";
 import { Rocket } from "lucide-react";
 
 import { Suspense } from "react";
+import { useFormStatus } from "react-dom";
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+  return (
+    <button type="submit" className="btn btn-primary" disabled={pending} style={{ width: "100%", padding: "1rem", fontSize: "1.125rem", opacity: pending ? 0.7 : 1, cursor: pending ? "not-allowed" : "pointer" }}>
+      {pending ? "SUBMITTING..." : "SUBMIT PROJECT REQUEST"} {!pending && <Rocket size={20} />}
+    </button>
+  );
+}
 
 function RegisterForm() {
   const searchParams = useSearchParams();
@@ -148,9 +158,7 @@ function RegisterForm() {
             </div>
             
             <div style={{ gridColumn: "1 / -1", marginTop: "1rem" }}>
-              <button type="submit" className="btn btn-primary" style={{ width: "100%", padding: "1rem", fontSize: "1.125rem" }}>
-                SUBMIT PROJECT REQUEST <Rocket size={20} />
-              </button>
+              <SubmitButton />
             </div>
           </div>
         </form>
