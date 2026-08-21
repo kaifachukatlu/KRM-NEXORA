@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
-import { Code2, User, Github, Instagram, Linkedin, Mail } from "lucide-react";
+import { Code2, User, Code, Briefcase, Camera, Mail } from "lucide-react";
 import FloatingLines from "@/components/FloatingLines";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -69,9 +69,9 @@ export default function RootLayout({
                   Empowering students with premium project development, hardware integration, and comprehensive documentation services.
                 </p>
                 <div style={{ display: "flex", gap: "1rem" }}>
-                  <a href="#" style={{ color: "var(--text-secondary)", transition: "color 0.3s" }}><Github size={20} /></a>
-                  <a href="#" style={{ color: "var(--text-secondary)", transition: "color 0.3s" }}><Linkedin size={20} /></a>
-                  <a href="#" style={{ color: "var(--text-secondary)", transition: "color 0.3s" }}><Instagram size={20} /></a>
+                  <a href="#" style={{ color: "var(--text-secondary)", transition: "color 0.3s" }}><Code size={20} /></a>
+                  <a href="#" style={{ color: "var(--text-secondary)", transition: "color 0.3s" }}><Briefcase size={20} /></a>
+                  <a href="#" style={{ color: "var(--text-secondary)", transition: "color 0.3s" }}><Camera size={20} /></a>
                   <a href="mailto:contact@krmnexora.com" style={{ color: "var(--text-secondary)", transition: "color 0.3s" }}><Mail size={20} /></a>
                 </div>
               </div>
