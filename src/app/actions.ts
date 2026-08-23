@@ -26,9 +26,9 @@ export async function submitRegistration(formData: FormData) {
     data: data,
   });
 
-  // Send registration confirmation email (non-blocking)
+  // Send registration confirmation email (await to ensure Vercel doesn't kill the function before sending)
   const dashboardLink = `https://krmnexora.com/dashboard/student?regId=${newRequest.registrationId}`;
-  sendEmail(
+  await sendEmail(
     newRequest.emailAddress,
     "Registration Confirmed: KRM NEXORA",
     `
@@ -86,7 +86,7 @@ export async function updateProjectAdminDetails(projectId: string, formData: For
 
   emailHtml += `</div>`;
 
-  sendEmail(
+  await sendEmail(
     updatedProject.emailAddress,
     `Project Update: ${status}`,
     emailHtml
