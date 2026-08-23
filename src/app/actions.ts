@@ -27,7 +27,8 @@ export async function submitRegistration(formData: FormData) {
   });
 
   // Send registration confirmation email (await to ensure Vercel doesn't kill the function before sending)
-  const dashboardLink = `https://krmnexora.com/dashboard/student?regId=${newRequest.registrationId}`;
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const dashboardLink = `${baseUrl}/dashboard/student?regId=${newRequest.registrationId}`;
   await sendEmail(
     newRequest.emailAddress,
     "Registration Confirmed: KRM NEXORA",
@@ -62,8 +63,9 @@ export async function updateProjectAdminDetails(projectId: string, formData: For
     },
   });
 
-  // If status changed, send an update email (non-blocking)
-  const dashboardLink = `https://krmnexora.com/dashboard/student?regId=${updatedProject.registrationId}`;
+  // If status changed, send an update email (await to ensure Vercel doesn't kill the function)
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const dashboardLink = `${baseUrl}/dashboard/student?regId=${updatedProject.registrationId}`;
   
   let emailHtml = `
     <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
